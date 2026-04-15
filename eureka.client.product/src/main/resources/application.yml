@@ -1,0 +1,27 @@
+server:
+  port: 19093
+
+spring:
+#  profiles:
+#    active: local
+  application:
+    name: product-service
+  config:
+    import: "configserver:http://localhost:18080"
+  cloud:
+    config:
+      discovery:
+        enabled: false
+
+management:
+  zipkin:
+    tracing:
+      endpoint: "http://localhost:19411/api/v2/spans"
+  tracing:
+    sampling:
+      probability: 1.0
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:19090/eureka/
